@@ -30,8 +30,6 @@ export const LoginPage = () => {
     setLoading(false);
   };
 
-  console.log(error);
-
   return (
     <UI.PageOuter>
       <UI.FormLogin>
