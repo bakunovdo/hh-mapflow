@@ -1,12 +1,15 @@
-import 'normalize.css';
 import React from 'react';
 import ReactDOM from 'react-dom';
+
+import { ChakraProvider } from '@chakra-ui/react';
 
 import { Application } from './app/index';
 
 ReactDOM.render(
   <React.StrictMode>
-    <Application />
+    <ChakraProvider resetCSS>
+      <Application />
+    </ChakraProvider>
   </React.StrictMode>,
   document.getElementById('root'),
 );
