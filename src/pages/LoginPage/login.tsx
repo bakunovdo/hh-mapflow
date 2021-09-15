@@ -7,18 +7,19 @@ import { Box, Divider, VStack } from '@chakra-ui/layout';
 import { Alert, AlertIcon, FormControl, FormLabel } from '@chakra-ui/react';
 
 import { sleep } from '../../shared/client/sleep';
+import { FixedButton } from '../../shared/ui/button';
 import * as UI from './login.styles';
 
 export const LoginPage = () => {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<null | string>(null);
 
-  const submitHandler = async (e: React.FormEvent<HTMLDivElement>) => {
+  const submitHandler = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
     setError(null);
     setLoading(true);
-    await sleep(1000);
+    await sleep(100);
 
     const isError = Math.random() > 0.5;
     if (isError) {
@@ -33,40 +34,42 @@ export const LoginPage = () => {
   return (
     <UI.PageOuter>
       <UI.FormLogin>
-        <VStack as="form" spacing="1rem" onSubmit={submitHandler}>
-          <Box className="logo" width="80%" />
+        <form onSubmit={submitHandler}>
+          <VStack spacing="1rem">
+            <Box className="logo" width="80%" />
 
-          <Box width="100%">
-            <FormControl id="email">
-              <FormLabel>Email</FormLabel>
-              <Input type="email" placeholder="Enter your email" />
-            </FormControl>
-          </Box>
+            <Box width="100%">
+              <FormControl id="email">
+                <FormLabel>Email</FormLabel>
+                <Input type="email" placeholder="Enter your email" />
+              </FormControl>
+            </Box>
 
-          <Box width="100%">
-            <FormControl id="password">
-              <FormLabel>Password</FormLabel>
-              <Input isRequired type="password" placeholder="Enter your password" />
-            </FormControl>
-          </Box>
+            <Box width="100%">
+              <FormControl id="password">
+                <FormLabel>Password</FormLabel>
+                <Input isRequired type="password" placeholder="Enter your password" />
+              </FormControl>
+            </Box>
 
-          <Button isFullWidth colorScheme="blue" type="submit" isLoading={loading}>
-            Log In
-          </Button>
-          <Button isFullWidth colorScheme="green">
-            Sign Up
-          </Button>
-          <Divider />
-          <Button isFullWidth variant="outline" leftIcon={<FcGoogle />} textAlign="left">
-            Log In with Google
-          </Button>
-          {error && (
-            <Alert status="error">
-              <AlertIcon />
-              {error}
-            </Alert>
-          )}
-        </VStack>
+            <FixedButton isFullWidth colorScheme="blue" type="submit" loading={loading}>
+              Log In
+            </FixedButton>
+            <Button isFullWidth colorScheme="green">
+              Sign Up
+            </Button>
+            <Divider />
+            <Button isFullWidth variant="outline" leftIcon={<FcGoogle />} textAlign="left">
+              Log In with Google
+            </Button>
+            {error && (
+              <Alert status="error">
+                <AlertIcon />
+                {error}
+              </Alert>
+            )}
+          </VStack>
+        </form>
       </UI.FormLogin>
     </UI.PageOuter>
   );
