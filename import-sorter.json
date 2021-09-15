@@ -1,0 +1,49 @@
+{
+  "editor.formatOnSave": true,
+  "importSorter.generalConfiguration.sortOnBeforeSave": true,
+  "importSorter.importStringConfiguration.maximumNumberOfImportExpressionsPerLine.type": "newLineEachExpressionAfterCountLimitExceptIfOnlyOne",
+  "importSorter.importStringConfiguration.maximumNumberOfImportExpressionsPerLine.count": 100,
+  "importSorter.importStringConfiguration.tabSize": 2,
+  "importSorter.importStringConfiguration.trailingComma": "all",
+  "importSorter.importStringConfiguration.quoteMark": "single",
+  "sortConfiguration": {
+    "customOrderingRules": {
+      "defaultNumberOfEmptyLinesAfterGroup": 1,
+      "defaultOrderLevel": 20,
+      "rules": [
+        {
+          "type": "importMember",
+          "orderLevel": 15
+        },
+        {
+          "regex": "^react",
+          "orderLevel": 15
+        },
+        {
+          "regex": "^axios|expo|mobx",
+          "orderLevel": 17
+        },
+        {
+          "regex": "^@assets|@app|@shared|@features|@navigations|@pages|@screen|@entities",
+          "orderLevel": 30
+        },
+        {
+          "regex": "^@root",
+          "orderLevel": 37
+        },
+        {
+          "regex": "^src",
+          "orderLevel": 35
+        },
+        {
+          "regex": "^[@]",
+          "orderLevel": 20
+        },
+        {
+          "regex": "^[.]",
+          "orderLevel": 40
+        }
+      ]
+    }
+  }
+}
