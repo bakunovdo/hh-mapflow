@@ -1,14 +1,22 @@
 import { useState } from 'react';
 import { FcGoogle } from 'react-icons/fc';
 
-import { Button } from '@chakra-ui/button';
 import { Input } from '@chakra-ui/input';
 import { Box, Divider, VStack } from '@chakra-ui/layout';
-import { Alert, AlertIcon, FormControl, FormLabel } from '@chakra-ui/react';
+import { Alert, AlertIcon, Button, FormControl, FormLabel } from '@chakra-ui/react';
 
 import { sleep } from '../../shared/client/sleep';
-import { FixedButton } from '../../shared/ui/button';
 import * as UI from './login.styles';
+
+const fakeRequest = async () => {
+  await sleep(100);
+  const isError = Math.random() > 0.5;
+  if (isError) {
+    throw new Error('');
+  }
+  await sleep(2000);
+  return true; // some response
+};
 
 export const LoginPage = () => {
   const [loading, setLoading] = useState(false);
@@ -17,18 +25,15 @@ export const LoginPage = () => {
   const submitHandler = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
-    setError(null);
-    setLoading(true);
-    await sleep(100);
-
-    const isError = Math.random() > 0.5;
-    if (isError) {
+    try {
+      setError(null);
+      setLoading(true);
+      await fakeRequest();
+    } catch (error) {
       setError('Ошибка авторизации!');
-    } else {
-      await sleep(2000);
+    } finally {
+      setLoading(false);
     }
-
-    setLoading(false);
   };
 
   return (
@@ -52,9 +57,9 @@ export const LoginPage = () => {
               </FormControl>
             </Box>
 
-            <FixedButton isFullWidth colorScheme="blue" type="submit" loading={loading}>
+            <Button isFullWidth colorScheme="blue" type="submit" isLoading={loading}>
               Log In
-            </FixedButton>
+            </Button>
             <Button isFullWidth colorScheme="green">
               Sign Up
             </Button>
